@@ -1,0 +1,4 @@
+*.log*
+*.idea
+*/config/db.php
+/app/assets/*
