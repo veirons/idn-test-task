@@ -9,6 +9,19 @@ class PostController extends Controller
 	 */
 	private $_model;
 
+    /**
+     * Declares class-based actions.
+     */
+    public function actions()
+    {
+        return array(
+            // captcha action renders the CAPTCHA image displayed on the contact page
+            'simple_chat.'=>array(
+                'class'=>'ext.widgets.SimpleChat',
+            ),
+        );
+    }
+
 	/**
 	 * @return array action filters
 	 */
@@ -28,7 +41,7 @@ class PostController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to access 'index' and 'view' actions.
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view', 'simple_chat.GetMessage'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated users to access all actions

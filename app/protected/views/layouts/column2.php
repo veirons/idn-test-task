@@ -1,5 +1,11 @@
 <?php $this->beginContent('/layouts/main'); ?>
 <div class="container">
+    <?php $this->widget('ext.widgets.SimpleChat', array(
+            'options' => array(
+                'count'=> Yii::app()->params['chatCountMessages'],
+                'url' => $this->createUrl('post/simple_chat.getMessage'),
+            ),
+        )); ?>
 	<div class="span-18">
 		<div id="content">
 			<?php echo $content; ?>
