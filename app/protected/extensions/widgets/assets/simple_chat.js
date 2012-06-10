@@ -19,15 +19,22 @@
         },
 
         loadData: function(){
-            var self = this;//
-            //var url = 'simple_chat.getMessage';
+            var self = this;
             $.ajax({
                 url: self.options.url,
                 type: 'GET',
                 success: function(data) {
-                   console.log(data);
+                    self.addedData(jQuery.parseJSON(data));
+                    console.log(data);
                 }
             });
+        },
+
+        addedData: function(data){
+            for(i in data){
+                message = '[' + data[i].time + '] ' + data[i].username + ': ' + data[i].message;
+                $('.chat_text').append('<span class="d_block">' + message + '</span>');
+            }
         }
     });
 })(jQuery);

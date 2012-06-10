@@ -43,7 +43,7 @@ class SimpleChat extends CWidget
                     <div class="chat_bottom">
                         <?php
                             echo CHtml::textField('chat_message', '',array('class' => 'chat_message'));
-                            echo CHtml::button();
+                            echo CHtml::button('send', array('class'=>'button_send'));
                         ?>
                     </div>
                 </div>

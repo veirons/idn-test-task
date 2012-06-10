@@ -12,19 +12,24 @@ class GetMessage extends CAction
 {
     public function run()
 	{
-       echo 'eee';
-    }
-
-    public function getMessages(){
-        $messages = Chat::model()->findAll();
+        $db = Yii::app()->db;
+        $chat_table = Chat::tableName();
+        $user_table = User::tableName();
+        $sql = "SELECT * FROM {$chat_table} c LEFT JOIN {$user_table} u ON c.user_id = u.id ";
+        $command=$db->createCommand($sql);
+        //$command->bindParam(":ID", $id);
+        $rows = $command->queryAll();
         $arr = array();
 
-        foreach ($messages as $message) {
+        foreach ($rows as $row) {
             $arr[] = array(
-                'id'=>$message->id,
-                'message'=>$message->message,
+                'id' => $row['id'],
+                'message'=>$row['message'],
+                'time' => $row['datetime'] ? $row['datetime'] : '',
+                'username' => $row['username'] ? $row['username'] : 'Guest',
             );
         }
          echo json_encode($arr);
     }
+
 }
