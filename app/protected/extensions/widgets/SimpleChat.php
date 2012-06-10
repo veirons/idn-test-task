@@ -36,7 +36,6 @@ class SimpleChat extends CWidget
         ?>
         <div class="chat_wrapper">
             <div id="simple_chat">
-                <div class="chat_left"></div>
                 <div class="chat_main">
                     <div class="chat_text">
                     </div>
@@ -47,6 +46,7 @@ class SimpleChat extends CWidget
                         ?>
                     </div>
                 </div>
+                <div class="chat_left hidden_chat"></div>
             </div>
         </div>
 
