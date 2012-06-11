@@ -35,6 +35,7 @@
 }
 
 .chat_text{
+    overflow: auto;
     border-bottom: 2px solid #b5d7e7;
     height:258px;
 }
@@ -56,9 +57,10 @@
 }
 
 .button_send {
+    background: whiteSmoke;
     font-size: 20px;
     color: #B5D7E7;
-    margin-top:5px;
+    margin-top:2px;
     height: 34px;
     width: 90px;
     border: 3px solid #B5D7E7;
@@ -72,4 +74,12 @@
 .hidden_chat{
     background: url('images/show.png');
     background-repeat: no-repeat;
+}
+
+.row.buttons{
+    display:inline;
+}
+
+.row.field_message{
+    display:inline;
 }

@@ -2,8 +2,10 @@
 <div class="container">
     <?php $this->widget('ext.widgets.SimpleChat', array(
             'options' => array(
-                'count'=> Yii::app()->params['chatCountMessages'],
-                'url' => $this->createUrl('post/simple_chat.getMessage'),
+                'limitCount'=> Yii::app()->params['chatCountMessages'],
+                'urlGet' => $this->createUrl('post/simple_chat.getMessage'),
+                'urlAdd' => $this->createUrl('post/simple_chat.addMessage'),
+                'upTime' => '5000',
             ),
         )); ?>
 	<div class="span-18">

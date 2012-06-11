@@ -17,6 +17,7 @@ class SimpleChat extends CWidget
            // naming the action and pointing to the location
            // where the external action class is
            'getMessage'=>'ext.widgets.getMessage',
+           'addMessage'=>'ext.widgets.addMessage',
         );
     }
 
@@ -37,12 +38,30 @@ class SimpleChat extends CWidget
         <div class="chat_wrapper">
             <div id="simple_chat">
                 <div class="chat_main">
-                    <div class="chat_text">
+                    <div class="chat_text" id="chat_text">
                     </div>
                     <div class="chat_bottom">
                         <?php
-                            echo CHtml::textField('chat_message', '',array('class' => 'chat_message'));
-                            echo CHtml::button('send', array('class'=>'button_send'));
+                            $form = new CForm(array(
+                                'model' => new Chat,
+                                'elements' => array(
+                                    "message" => array(
+                                        'type' => 'text',
+                                        'visible' => true,
+                                        'label' => '',
+                                        'class' => 'chat_message',
+                                    ),
+                                ),
+                                'buttons' => array(
+                                    'login'=>array(
+                                        'type'=>'submit',
+                                        'label'=>'Send',
+                                        'class'=>'button_send'
+                                    ),
+                                ),
+                            ));
+                            echo $form->render();
+
                         ?>
                     </div>
                 </div>

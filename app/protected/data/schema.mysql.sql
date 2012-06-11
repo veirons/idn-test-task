@@ -52,6 +52,16 @@ CREATE TABLE tbl_tag
 	frequency INTEGER DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+CREATE TABLE `tbl_chat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `datetime` datetime DEFAULT NULL,
+  `message` varchar(150) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_tbl_chat` (`user_id`),
+  CONSTRAINT `FK_tbl_chat` FOREIGN KEY (`user_id`) REFERENCES `tbl_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 INSERT INTO tbl_lookup (name, type, code, position) VALUES ('Draft', 'PostStatus', 1, 1);
 INSERT INTO tbl_lookup (name, type, code, position) VALUES ('Published', 'PostStatus', 2, 2);
 INSERT INTO tbl_lookup (name, type, code, position) VALUES ('Archived', 'PostStatus', 3, 3);
@@ -71,3 +81,7 @@ INSERT INTO tbl_comment (content, status, create_time, author, email, post_id) V
 INSERT INTO tbl_tag (name) VALUES ('yii');
 INSERT INTO tbl_tag (name) VALUES ('blog');
 INSERT INTO tbl_tag (name) VALUES ('test');
+
+INSERT INTO tbl_chat (message, datetime, user_id) VALUES ('Hi!', '2012-06-11 08:35:41', 1);
+INSERT INTO tbl_chat (message, datetime) VALUES ('Hi!', '2012-06-11 08:35:52');
+INSERT INTO tbl_chat (message, datetime, user_id) VALUES ('Hello world!', '2012-06-11 08:36:25', 2);

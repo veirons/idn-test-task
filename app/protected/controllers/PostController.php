@@ -41,7 +41,7 @@ class PostController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to access 'index' and 'view' actions.
-				'actions'=>array('index','view', 'simple_chat.GetMessage'),
+				'actions'=>array('index','view', 'simple_chat.GetMessage', 'simple_chat.AddMessage'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated users to access all actions
