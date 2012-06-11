@@ -14,7 +14,7 @@ class AddMessage extends CAction
     {
         $chat = new Chat;
         if (isset($_POST['Chat'])) {
-            $chat->attributes = $_POST['Chat'];
+            $chat->setAttribute('message', strip_tags($_POST['Chat']['message']));
             $chat->setAttribute('datetime', Yii::app()->dateFormatter->format('yyyy.MM.dd HH:m:s', time()));
             $chat->setAttribute('user_id', Yii::app()->user->id);
             if($chat->save()) echo '1';
