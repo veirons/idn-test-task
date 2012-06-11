@@ -8,6 +8,7 @@ used soft:
 2. Import database structure from app/protected/data/schema.mysql.sql
 3. Copy and rename configure access to database in app/protected/config/db_sample.php 
     to app/protected/config/db_sample.php and changed it
+4. create folder assets app/assets and change rights if need
 
 Username / password pairs: 
 
