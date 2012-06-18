@@ -13,27 +13,21 @@
 class GetMessage extends CAction
 {
     public function run() {
-        $limit = $_GET['count'];
-        $db = Yii::app()->db;
-        $chat_table = Chat::tableName();
-        $user_table = User::tableName();
-        $where = $_GET['last_id'] ? ' WHERE c.id > ' . $_GET['last_id'] : '';
-        $sql = "SELECT c.id, c.datetime, c.message, u.username
-                FROM {$chat_table} c
-                LEFT JOIN {$user_table} u ON c.user_id = u.id
-                {$where}
-                order by c.id desc
-                LIMIT {$limit}";
-        $command=$db->createCommand($sql);
-        $rows = $command->queryAll();
+        $criteria = new CDbCriteria();
+        $criteria->with = 'user';
+        $criteria->order = 't.id DESC';
+        $criteria->limit = (int)($_GET['count']);
+        $criteria->condition = 't.id > :last_id';
+        $criteria->params = array(':last_id' => (int)($_GET['last_id']));
+        $messages = Chat::model()->findAll($criteria);
         $arr = array();
-        $count = count($rows);
+        $count = count($messages);
         for ($i = $count-1; $i >= 0; $i--){
             $arr[] = array(
-                'id' => $rows[$i]['id'],
-                'message'=>$rows[$i]['message'],
-                'time' => $rows[$i]['datetime'] ? $rows[$i]['datetime'] : '',
-                'username' => $rows[$i]['username'] ? $rows[$i]['username'] : 'Guest',
+                'id' => $messages[$i]['id'],
+                'message'=>$messages[$i]['message'],
+                'time' => $messages[$i]['datetime'] ? $messages[$i]['datetime'] : '',
+                'username' => $messages[$i]->user['username'] ? $messages[$i]->user['username'] : 'Guest',
             );
         }
         echo json_encode($arr);
